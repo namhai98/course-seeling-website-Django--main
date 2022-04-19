@@ -1,0 +1,78 @@
+{% extends 'courses/base.html' %}
+{% load course_custom_tags %}
+{%block title%}Courses
+{% endblock %}
+
+{%block content%}
+
+<style>
+    .price {
+        font-size: 20px;
+    }
+    .masthead {
+        height: 300px;
+        min-height: 500px;
+        background-color: white;
+        background-image: url('https://img-c.udemycdn.com/notices/web_banner/image_udlite/4f9d4123-43ee-4f2a-b5ef-1f2ac22962f3.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+</style>
+
+<div class="container">
+    <header class="masthead">
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-6 text-center">
+              <h1 class="fw-light text-secondary">New to Gunden? Lucky you.</h1>
+              <p class="lead text-secondary">Courses start at 15000₮. Get your new-student offer before it expires.</p>
+            </div>
+          </div>
+        </div>
+      </header>
+    
+    <br>
+    <div class="row">
+        
+        {% for course in courses %}
+        <div class="col mx-auto">
+            
+            <div class="card bg-warning  border-info mx-auto m-2" style="width: 18rem;">
+                <img class="card-img-top" src="{{course.thumbnail.url}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{course.name}}</h5>
+                    <p class="card-text m-0 p-0">
+                        Хямдрал {{course.discount}}%
+                        <br>
+                        <span class="price">
+                            <del>{{course.price}}₮</del>
+                            &nbsp;
+                            <span>{% cal_sellprice course.price course.discount as value %} {{value}}₮</span>
+                        </span>
+                    </p>
+                </div>
+                <div class="card-footer p-0">
+                    {% is_enrolled request course as enrolled %}
+                    <div class="row no-gutters m-1">
+                        {% if enrolled %}
+                        <div class="col">
+                            <a href="/course/{{course.slug}}" class="btn btn-primary btn-block">Хичээл үзэх</a>
+                        </div>
+                        {% else %}
+                        <div class="col border-right">
+                            <a href="/check-out/{{course.slug}}" class="btn btn-primary  btn-block">Худалдаж авах</a>
+                        </div>
+                        <div class="col border-right">
+                            <a href="/course/{{course.slug}}" class="btn btn-primary   btn-block">Мэдээлэл</a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{%endblock%}

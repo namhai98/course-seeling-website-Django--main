@@ -1,0 +1,25 @@
+{% extends 'courses/base.html' %}
+{% load course_custom_tags %}
+{% load crispy_forms_tags %}
+{%block title%}
+Signup
+{% endblock %}
+
+{%block content%}
+
+<div class="container">
+   <h1 class="display-1">Нэвтрэх хуудас</h1>
+   <hr>
+<div class="form-group">
+   <table>
+      <form method="post" action="">
+         {% csrf_token %}
+         {{form|crispy}}
+
+         <input  class="btn btn-primary btn-lg" style="text-align: center; width: 300px;  " type="submit" value="Login">
+      </form>
+   </table>
+</div>
+</div>
+
+{%endblock%}

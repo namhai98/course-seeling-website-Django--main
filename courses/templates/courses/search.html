@@ -1,0 +1,23 @@
+{% extends 'courses/base.html' %}
+{% load course_custom_tags %}
+{% load crispy_forms_tags %}
+{%block title%}
+Signup
+{% endblock %}
+
+{%block content%}
+
+<div class="container">
+    {% if searched %}
+    <h1 class="display-1">Таний хайлт"{{ searched }}"</h1>
+    <br>
+    {% for course in courses %}
+        {{ courses }}
+    </br>
+        {% endfor %}
+    {% else %}
+    <h1 class="display-1">Хайх зүлээ оруулна уу!!!</h1>
+    {% endif %}
+   <hr>
+</div>
+{%endblock%}
